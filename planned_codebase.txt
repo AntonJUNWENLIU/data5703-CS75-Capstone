@@ -1,0 +1,32 @@
+CAPSTONE/
+│── napari_plugin/          # Napari plugin code
+│   ├── __init__.py         # Plugin initialisation
+│   ├── _widget.py          # UI interaction logic
+│   ├── image_loader.py     # Added: Multi-Channel Image Processing Module
+│   ├── segmentor.py        # Added: SAM Segmentation Model Encapsulation
+│   ├── postprocessing.py   # Added: Interactive tweaks and optimisations
+│   ├── data_export.py      # Added: Support JSON & TIFF format exporting.
+│   └── napari.yaml         # Plug-in Configuration
+│
+│── server/                 # Server-side reasoning
+│   ├── new_server.py       # New server-side version
+│   ├── model_handler.py    # Added: SAM inference processing
+│   ├── api.py              # Added: REST API interface
+│   └── config.py           # Added: Server Configuration File
+│
+│── notebooks/              # Interactive experiment code
+│   ├── test_pipeline.ipynb # Added: End-to-end testing
+│   ├── napari_client.py    # Client-side interaction with Napari
+│
+│── checkpoints/            # Pre-training model
+│   ├── sam2.1_hiera_large.pt
+│   ├── download_ckpts.sh
+│
+│── docs/                   # documents
+│   ├── README.md           # readme
+│   ├── technical_report.md # report
+│   ├── requirements.pdf    # requirements document
+│
+│── requirements.txt        # Dependencies file
+│── LICENSE                 # license
+│── pyproject.toml          # Project Configuration
