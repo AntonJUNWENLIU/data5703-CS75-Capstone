@@ -1,123 +1,163 @@
-# README - 5703 Plugin v1.0
+# 5703 Napari Plugin v1.0
 
 ## Overview
 
-This plugin integrates the **SAM2** model with the **Napari** interface to enhance image segmentation capabilities. Version **v0.3** introduces several improvements in functionality, accuracy, and stability.
+This Napari plugin integrates the **SAM2** model to provide interactive and accurate image segmentation for biological and medical images.
+
+Version **v1.0** introduces improved stability, refined labeling logic, and a new **label renaming feature** for enhanced usability.
+
+---
+
+## 🔥 Quick Start
+
+⚠️ **Important: Start the backend server before launching the plugin!**
+
+```bash
+# Step 1: Run the backend server
+cd Server
+python New_server.py
+```
+
+```bash
+# Step 2: Open the client/plugin
+napari
+```
 
 ---
 
 ## Key Features
 
-**Enhanced Logic and Code Refactoring**
+### 🎯 Segmentation Modes
 
-- Segmentation results are now written into separate `Labels` layers for better visualization:
-  - **Point** → `Points_mask`
-  - **Box** → `Box_mask`
-  - **Auto-Segmentation** → `AutoSeg_Labels`
+- **Point Prompt Segmentation** → stored in `Points_mask`
+- **Box Prompt Segmentation** → stored in `Box_mask`
+- **Auto Segmentation** → stored in `AutoSeg_mask`
 
-**Flexible Labeling Modes**
+Each segmentation assigns **unique label IDs**, ensuring proper multi-label support.
 
-- Supports two fusion modes for Point and Box prompts:
-  - \`\`: Adds new labels without modifying existing ones.
-  - \`\`: Refines existing labels using `union`, `intersection`, or `overwrite` logic.
+---
 
-**Improved Stability and Performance**
+### 🧐 Labeling Modes
 
-- Improved **coordinate handling** to ensure segmentation aligns correctly with the original image.
-- Flask server logic enhanced by adding `predictor.set_image()` to prevent stale image caching issues.
+- **Add Mode**: Insert new labels on top of existing ones  
+- **Refine Mode**: Update existing labels using:
+  - `union`
+  - `intersection`
+  - `overwrite`
 
-**Event Blocking Mechanism**
+---
 
-- Ensures only the latest point is retained during Point-based segmentation to prevent recursive errors.
+### ✏️ Label Renaming
 
-**Multi-label Overlay**
+You can assign meaningful **names to labels**, such as `"nucleus"` or `"membrane"`:
 
-- Each new segmentation now assigns a unique label ID by referencing the maximum label value in the current layer.
+- Accessible via the `NAME LABEL` button
+- Supports interactive overlay showing names directly on the viewer
+- All label names are stored in metadata and rendered above each region
+
+---
+
+### ⚙️ Technical Improvements
+
+- 🔁 **Event blocker**: Prevents recursive prompt loops by only using the latest point  
+- 🧹 **Auto label ID assignment**: Tracks and increments from max label ID  
+- 🧠 **Predictor caching fixed**: Server uses `predictor.set_image()` to load fresh images per request  
+- 📀 **Coordinate accuracy**: All segmentation uses native image coordinates, avoiding shift artifacts
 
 ---
 
 ## Installation
 
-Ensure you have the following dependencies installed:
+Make sure the following dependencies are installed:
 
 ```bash
-pip install sam2
-pip install napari
-pip install flask
+pip install sam2 napari flask
 ```
 
 ---
 
-## Configuration
+## Model Checkpoints
 
-To resolve file path issues in SAM2, ensure your `CONFIG_PATH` is set correctly:
+Download and store SAM2 checkpoints:
 
-### Recommended Solution
+```bash
+cd checkpoints
+wget https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_large.pt
+wget https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_small.pt
+wget https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_tiny.pt
+cd ..
+```
+
+Expected structure:
+
+```
+checkpoints/
+├── sam2.1_hiera_large.pt
+├── sam2.1_hiera_small.pt
+└── sam2.1_hiera_tiny.pt
+```
+
+---
+
+## Loading the SAM2 Model
+
+Example:
 
 ```python
 import sam2
 import os
+import torch
 
 sam2_path = os.path.dirname(sam2.__file__)
 CONFIG_PATH = os.path.join(sam2_path, "configs", "sam2.1", "sam2.1_hiera_l.yaml")
-```
 
-### Alternative Solutions
-
-- Correct the path in `initialize()`:
-
-```python
-initialize(config_path=os.path.join(sam2_path, "configs"), version_base=None)
-```
-
-- If needed, ensure your working directory is set correctly:
-
-```bash
-cd E:\USYD\Course\25S1\5703\CAPSTONE
+with torch.compile():
+    predictor = SAM2ImagePredictor(build_sam2(CONFIG_PATH, checkpoint))
 ```
 
 ---
 
-## Usage
+## How to Use the Plugin
 
-1. **Launch Napari**
+1. **Start the server first**:
+   ```bash
+   cd Server
+   python New_server.py
+   ```
 
+2. **Then open Napari**:
    ```bash
    napari
    ```
 
-2. **Load Image**\
-   Drag and drop the desired image file into Napari.
+3. **Image Segmentation Modes**:
+   - Draw **points** in the `Prompt Points` layer
+   - Draw **boxes** in the `Bounding Box` layer
+   - Click **AUTO-SEGMENT** to get full image labels
 
-3. **Segmentation Modes**
-
-   - **Point Segmentation:** Add points in the `Prompt Points` layer to trigger segmentation.
-   - **Box Segmentation:** Draw a bounding box in the `Box_mask` layer.
-   - **Auto Segmentation:** Use the `/auto_segment` API for full image segmentation.
-
-4. **Result Viewing**
-
-   - Segmentation results are stored in the following layers:
-     - \`\` → Auto-segmentation results
-     - \`\` → Point prompt results
-     - \`\` → Box prompt results
+4. **Label Renaming**:
+   - Use the `NAME LABEL` widget
+   - Choose `label_id` and assign a name like `"cell nucleus"`
+   - Overlay will update automatically to show label names
 
 ---
 
 ## Known Issues
 
-- **Empty Mask Issue:** Ensure Flask is correctly resetting images with `predictor.set_image()` to avoid stale image caching.
-- **Coordinate Misalignment:** All segmentation methods now use original image coordinates to ensure accuracy.
+- 🧊 **Empty mask on server**: Make sure `predictor.set_image()` is used per request.
+- 📀 **Misaligned segmentation**: Solved via strict coordinate tracking.
+- 🖥️ **Run order matters**: Always run `New_server.py` **before** interacting with the plugin.
 
 ---
 
-## Upcoming Improvements
+## Roadmap
 
-🔹 Additional testing on complex images to validate robustness.\
-🔹 Improved logging for easier debugging.\
-🔹 Performance optimization for faster processing of large-scale images.
+- 🔜 Export segmentation masks to file  
+- 🔜 Batch processing for auto-segmentation  
+- 🔜 Logging and advanced UI widgets for label control  
 
 ---
 
+## Contact
 
-
+Any question, please contact me by email or github
