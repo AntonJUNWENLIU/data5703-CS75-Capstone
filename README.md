@@ -1,4 +1,4 @@
-# README - 5703 Plugin v0.3
+# README - 5703 Plugin v1.0
 
 ## Overview
 
