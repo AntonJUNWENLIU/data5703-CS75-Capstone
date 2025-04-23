@@ -1,30 +1,34 @@
-micro-sam-1.4.0/
-│── micro_sam/                        # Core package: segmentation, inference, training
+.
+├── README.md                # Project overview and usage instructions
+├── pyproject.toml           # PEP 518 build system configuration
+├── setup.cfg                # setuptools configuration
+├── LICENSE                  # License information
+├── MANIFEST.in              # Package manifest for including additional files
+├── environment.yaml         # Conda environment specification
+├── folder_structure.txt     # Text outline of the folder layout
+│
+├── micro_sam/               # Main source code package
 │   ├── __init__.py
 │   ├── __version__.py
-│   ├── automatic_segmentation.py    # Automatic segmentation logic
-│   ├── instance_segmentation.py     # Instance segmentation module
-│   ├── multi_dimensional_segmentation.py  # Multi-dimensional image support
-│   ├── prompt_based_segmentation.py       # Prompt-based segmentation
-│   ├── visualization.py                   # Visualization tools
-│   ├── util.py / _model_settings.py       # Utilities and model settings
-│   ├── precompute_state.py / sample_data.py / inference.py
-│   ├── napari.yaml                        # Plugin registration file
-│   ├── training/                          # Model training modules
-│   │   ├── sam_trainer.py, semantic_sam_trainer.py, etc.
-│   ├── sam_annotator/                     # Napari plugin UI and annotation logic
-│   │   ├── _annotator.py, annotator_2d.py, annotator_3d.py, etc.
-
-│── workshops/                             # Tutorial/demo script collections
-│   ├── i2k_2024/                          # i2k workshop 2024 examples
-│   │   ├── download_models.py, finetune_sam.ipynb, README.md
-│   ├── tim_2025/                          # TIM workshop examples
-│       ├── check_omero_mask.py, upload_segmentation_to_omero.py, etc.
-
-│── README.md                              # Project description
-│── LICENSE                                # License information
-│── pyproject.toml                         # Build configuration
-│── setup.cfg                              # Installation metadata
-│── requirements-dev.txt                  # Development dependencies
-│── environment.yaml                      # Conda environment definition
-│── MANIFEST.in / .gitignore / RELEASE_OVERVIEW.md
+│   ├── *_segmentation.py    # Modules for various segmentation strategies
+│   ├── inference.py         # Inference utilities
+│   ├── precompute_state.py  # Preprocessing logic for model state
+│   ├── prompt_generators.py # Prompt generation utilities
+│   ├── visualization.py     # Visualization utilities
+│   ├── napari.yaml          # Napari plugin configuration
+│   │
+│   ├── models/              # SAM model integrations
+│   │   ├── build_sam.py
+│   │   ├── peft_sam.py
+│   │   ├── sam_3d_wrapper.py
+│   │   └── simple_sam_3d_wrapper.py
+│   │
+│   └── sam_annotator/       # Annotation tools for 2D, 3D, and tracking
+│       ├── annotator_2d.py / annotator_3d.py / annotator_tracking.py
+│       ├── image_series_annotator.py
+│       ├── _annotator.py / _state.py / _widgets.py / _tooltips.py
+│       └── util.py
+│
+├── micro_sam.egg-info/      # Metadata generated during packaging
+│
+└── Test/                    # Example data and test resources (Zarr format)
