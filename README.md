@@ -1,116 +1,82 @@
-# 5703 Napari Plugin v1.0
+# Micro-SAM: Segment Anything for Microscopy
 
-## 1. Overview
-
-This plugin integrates the **SAM2** model with the **Napari** visualization interface to enable efficient segmentation of biomedical images.
-
-Version 1.0 implements the following features:
-- Supports point prompts, box prompts, and automatic segmentation
-- Provides multiple label fusion strategies (merge / intersect / overwrite)
-- Supports **tile-based segmentation** for improved resolution handling
-- Adds custom label naming and in-view visualization
-- Refactors server/client logic to resolve fixed image segmentation errors
+[![Docs](https://shields.mitmproxy.org/badge/docs-pdoc.dev-brightgreen.svg)](https://computational-cell-analytics.github.io/micro-sam/)
+[![Conda](https://anaconda.org/conda-forge/micro_sam/badges/version.svg)](https://anaconda.org/conda-forge/micro_sam)
+[![Codecov](https://codecov.io/gh/computational-cell-analytics/micro-sam/graph/badge.svg?token=7ETPP5CABP)](https://codecov.io/gh/computational-cell-analytics/micro-sam)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7919746.svg)](https://doi.org/10.5281/zenodo.7919746)
 
 ---
 
-## 2. Quick Start
+<p align="right">
+  <img src="https://github.com/computational-cell-analytics/micro-sam/blob/master/doc/logo/logo_and_text.png" width="300">
+</p>
 
-### 1. Start the Backend Server
-```bash
-cd Server
-python New_server.py
-```
+**Micro-SAM** is a Napari plugin that enables interactive segmentation for microscopy images, powered by Meta’s [Segment Anything](https://segment-anything.com/).  
+It supports fast 2D segmentation and microscopy-specific model fine-tuning.
 
-### 2. Launch the Napari Plugin
+---
+
+## 🔧 Features
+
+- ✅ **Interactive 2D segmentation**
+- ✅ **Folder selection and image batch access**
+- ✅ **Custom cache path configuration**
+- ✅ **Efficient loading of previously saved segmentation results**
+
+<p align="center">
+  <img src="https://github.com/computational-cell-analytics/micro-sam/assets/4263537/d04cb158-9f5b-4460-98cd-023c4f19cccd" width="250">
+  <img src="https://github.com/computational-cell-analytics/micro-sam/assets/4263537/dfca3d9b-dba5-440b-b0f9-72a0683ac410" width="250">
+</p>
+
+---
+
+## 🚀 Getting Started
+
+Set up the plugin locally with the following steps:
+
 ```bash
+# 1. Clone the repository
+git clone https://github.com/computational-cell-analytics/micro-sam.git
+cd micro-sam
+
+# 2. Install in editable mode
+pip install -e .
+
+# 3. Launch napari
 napari
 ```
 
----
+To ensure all dependencies are correctly configured, use the provided environment:
 
-## 3. Key Features
-
-### Segmentation Modes
-- **Point Prompt** → `Points_mask`
-- **Box Prompt** → `Box_mask`
-- **Auto Segmentation** → `AutoSeg_mask`
-
-### Tile-based Segmentation
-- For large-scale images, supports `tile_shape` division
-- Segments image by tiles and stitches results to avoid boundary errors
-
-### Label Renaming
-- Users can assign custom names (e.g., “Nucleus”, “Membrane”) to label IDs
-- Displayed directly in the Napari layer UI
-
-### Technical Enhancements
-- Ensures `predictor.set_image()` is invoked on every image switch
-- Removed unnecessary prompt-loop bugs
-- Manages label ID assignment automatically
-
----
-
-## 4. Installation
-
-Ensure the following dependencies are installed:
 ```bash
-pip install sam2 napari flask
+conda env create -f environment.yaml
+conda activate micro-sam
 ```
 
-Or install the full environment from:
-```bash
-pip install -r requirements.txt
-```
-
-> It is recommended to use Conda for creating an isolated environment to avoid version conflicts.
+See the [official documentation](https://computational-cell-analytics.github.io/micro-sam/) for more setup instructions and usage tips.
 
 ---
 
-## 5. Model Configuration
+## 📖 Citation
 
-First, download SAM2 checkpoints:
-```bash
-cd checkpoints
-wget https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_large.pt
-...
-```
+If you use this tool in your work, please cite the following:
 
-Set up `config_path`:
-```python
-import sam2
-import os
-sam2_path = os.path.dirname(sam2.__file__)
-CONFIG_PATH = os.path.join(sam2_path, "configs", "sam2.1", "sam2.1_hiera_l.yaml")
-```
+- [Micro-SAM: Nature Methods 2024](https://www.nature.com/articles/s41592-024-02580-4)  
+- [Segment Anything](https://arxiv.org/abs/2304.02643)  
+- [MobileSAM](https://arxiv.org/abs/2306.14289) (for ViT-tiny models)
 
 ---
 
-## 6. How to Use the Plugin
+## 🔬 Related Projects
 
-1. Start the server and Napari
-2. Load an image and input prompts (point/box)
-3. Click AUTO-SEGMENT to generate segmentation
-4. Assign a label name and visualize in Napari
+- [Patho-SAM](https://github.com/computational-cell-analytics/patho-sam) – for histopathology
+- [Medico-SAM](https://github.com/computational-cell-analytics/medico-sam) – for medical imaging
+- [PEFT-SAM](https://github.com/computational-cell-analytics/peft-sam) – for parameter-efficient fine-tuning
 
----
-
-## 7. Known Issues
-
-- Segmentation fails: ensure `set_image()` is called on every switch
-- Misaligned masks: fixed by restoring original image coordinates
-- Slight inconsistencies across Windows/macOS environments
+Other related Napari-based SAM plugins:
+- [napari-sam (MIC-DKFZ)](https://github.com/MIC-DKFZ/napari-sam)
+- [napari-segment-anything (royerlab)](https://github.com/royerlab/napari-segment-anything)
 
 ---
 
-## 8. Roadmap
-
-- [ ] Support packaging & export for tile-based segmentation
-- [ ] Enhance logging and error reporting
-- [ ] Implement UI label management panel
-- [ ] Integrate Micro-SAM for efficient tiling + embedding
-
----
-
-## 9. Contact
-
-For questions, contact Jie Chen (or raise an issue on GitHub).
+© Computational Cell Analytics – MIT License
