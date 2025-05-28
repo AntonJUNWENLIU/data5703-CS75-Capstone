@@ -35,10 +35,6 @@ It supports fast 2D segmentation and microscopy-specific model fine-tuning.
 Set up the plugin locally with the following steps:
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/computational-cell-analytics/micro-sam.git
-cd micro-sam
-
 # 2. Install in editable mode
 pip install -e .
 
