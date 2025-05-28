@@ -1,4 +1,4 @@
-# Micro-SAM - V1.1.2
+# Micro-SAM - V2.0.1
 
 [![Docs](https://shields.mitmproxy.org/badge/docs-pdoc.dev-brightgreen.svg)](https://computational-cell-analytics.github.io/micro-sam/)
 [![Conda](https://anaconda.org/conda-forge/micro_sam/badges/version.svg)](https://anaconda.org/conda-forge/micro_sam)
@@ -18,10 +18,18 @@ It supports fast 2D segmentation and microscopy-specific model fine-tuning.
 
 ## 🔧 Features
 
-- ✅ **Interactive 2D segmentation**
-- ✅ **Folder selection and image batch access**
-- ✅ **Custom cache path configuration**
-- ✅ **Efficient loading of previously saved segmentation results**
+- ✅ **Interactive 2D segmentation**  
+  Supports prompt-based segmentation using point, box, brush, and eraser tools with real-time mask visualization.
+
+- ✅ **Folder selection & batch image access**  
+  Allows users to select a folder and browse multiple images, including support for multi-channel data with a channel slider.
+
+- ✅ **Custom cache path configuration**  
+  Users can define a custom cache directory for embeddings and segmentation results, enabling organized storage and reproducibility.
+
+- ✅ **Efficient loading of saved segmentation results**  
+  Previously saved masks are automatically loaded when available, avoiding redundant computation and accelerating workflows.
+
 
 <p align="center">
   <img src="https://github.com/computational-cell-analytics/micro-sam/assets/4263537/d04cb158-9f5b-4460-98cd-023c4f19cccd" width="250">
