@@ -40,10 +40,25 @@
 - Supports exporting segmentation results of different images and channels as .tiff or .zarr files
 - The exported content has a clear structure, suitable for subsequent analysis and archiving
 
-<p align="center">
-  <img src="https://github.com/computational-cell-analytics/micro-sam/assets/4263537/d04cb158-9f5b-4460-98cd-023c4f19cccd" width="250">
-  <img src="https://github.com/computational-cell-analytics/micro-sam/assets/4263537/dfca3d9b-dba5-440b-b0f9-72a0683ac410" width="250">
-</p>
+<table>
+  <tr>
+    <td align="center"><strong>Mually edit result</strong></td>
+    <td align="center"><strong>Segmentation Result Output</strong></td>
+    <td align="center"><strong>Ground Truth Mask</strong></td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/computational-cell-analytics/micro-sam/assets/4263537/d04cb158-9f5b-4460-98cd-023c4f19cccd" width="260"/>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/31ff6e8d-d492-4a96-a1e3-439004c06578" width="260"/>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/f97398fa-0772-4e7e-8e2a-ff9be29ed8fc" width="260"/>
+    </td>
+  </tr>
+</table>
+
 
 ---
 
@@ -69,6 +84,10 @@ conda activate micro-sam
 ---
 
 ## Plugin Usage Instructions (Step-by-step)
+<h3 align="center">
+  🎬 <a href="https://drive.google.com/file/d/1FJJZ33FNlg_Vs_phBEoJkK253cs2C7MK/view?usp=drive_link" target="_blank">Watch Demo Video</a>
+</h3>
+
 
 ### 1. **Launch the Plugin**
 - Open your terminal in a conda environment where the plugin is installed.
@@ -142,17 +161,6 @@ Diagram below is the back-end design structure.
 
 ---
 
-## Sample Result
-
-### Segmentation Result Output
-
-![image](https://github.com/user-attachments/assets/31ff6e8d-d492-4a96-a1e3-439004c06578)
-
-### Ground Truth Mask
-
-![image](https://github.com/user-attachments/assets/f97398fa-0772-4e7e-8e2a-ff9be29ed8fc)
-
----
 
 ## 📖 Citation
 
