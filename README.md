@@ -2,11 +2,6 @@
 
 ---
 
-<p align="right">
-  <img src="https://github.com/AntonJUNWENLIU/COMP5339-Assignment/blob/main/%E6%88%AA%E5%B1%8F2025-05-29%2015.40.57.png
-" width="300">
-</p>
-
 **CS75 Cell-segmentation Plug-in** is a cell image segmentation plug-in based on Napari, designed for researchers to perform multi-channel microscopic image analysis. Users can load .tiff or .jpg images in batches by dragging a single image or selecting a folder, using the slider to switch different channels, and performing embedded calculations and automatic segmentation on each channel. The plug-in supports two ways to save segmentation results: pixel-level and object-level. It allows users to set a label ID for each channel and merge and save the results through a commit operation. In case of unsatisfactory segmentation results, users can manually adjust parameters or use interactive tools such as box selection, point selection, and eraser to make corrections. Finally, the segmentation results of all channels can be exported as TIFF files for subsequent analysis and archiving. It supports fast 2D segmentation and microscopy-specific model fine-tuning.
 
 ---
