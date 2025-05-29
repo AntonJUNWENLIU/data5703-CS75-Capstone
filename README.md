@@ -1,14 +1,10 @@
-![image](https://github.com/user-attachments/assets/bc936ecc-a8c9-454e-a9dc-8c7bf7da09e2)# CS75 Napari Cell-segmentation Plug-in Based on micro-sam - V2.0.1
-
-[![Docs](https://shields.mitmproxy.org/badge/docs-pdoc.dev-brightgreen.svg)](https://computational-cell-analytics.github.io/micro-sam/)
-[![Conda](https://anaconda.org/conda-forge/micro_sam/badges/version.svg)](https://anaconda.org/conda-forge/micro_sam)
-[![Codecov](https://codecov.io/gh/computational-cell-analytics/micro-sam/graph/badge.svg?token=7ETPP5CABP)](https://codecov.io/gh/computational-cell-analytics/micro-sam)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7919746.svg)](https://doi.org/10.5281/zenodo.7919746)
+# CS75 Napari Cell-segmentation Plug-in Based on micro-sam - V2.0.1
 
 ---
 
 <p align="right">
-  <img src="https://github.com/computational-cell-analytics/micro-sam/blob/master/doc/logo/logo_and_text.png" width="300">
+  <img src="![截屏2025-05-29 15 39 48](https://github.com/user-attachments/assets/189b392e-af18-46c4-8a1d-b7936c9353a4)
+" width="300">
 </p>
 
 **CS75 Cell-segmentation Plug-in** is a cell image segmentation plug-in based on Napari, designed for researchers to perform multi-channel microscopic image analysis. Users can load .tiff or .jpg images in batches by dragging a single image or selecting a folder, using the slider to switch different channels, and performing embedded calculations and automatic segmentation on each channel. The plug-in supports two ways to save segmentation results: pixel-level and object-level. It allows users to set a label ID for each channel and merge and save the results through a commit operation. In case of unsatisfactory segmentation results, users can manually adjust parameters or use interactive tools such as box selection, point selection, and eraser to make corrections. Finally, the segmentation results of all channels can be exported as TIFF files for subsequent analysis and archiving. It supports fast 2D segmentation and microscopy-specific model fine-tuning.
