@@ -3,7 +3,7 @@
 ---
 
 <p align="right">
-  <img src="![截屏2025-05-29 15 39 48](https://github.com/user-attachments/assets/189b392e-af18-46c4-8a1d-b7936c9353a4)
+  <img src="https://github.com/AntonJUNWENLIU/COMP5339-Assignment/blob/main/%E6%88%AA%E5%B1%8F2025-05-29%2015.40.57.png
 " width="300">
 </p>
 
